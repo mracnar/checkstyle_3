@@ -35,16 +35,17 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-
-      # --- EKLENEN ADIM ---
       - name: Run tests
-        run: mvn test
+        run: mvn -B -Djacoco.skip=true test
         env:
-          JAVA_TOOL_OPTIONS: -Djava.awt.headless=true 
-      # ---------------------
+          JAVA_TOOL_OPTIONS: -Djava.awt.headless=true
 
       - name: Build and analyze
         env:
-          # TOKEN'I GÜVENLİ BİR ŞEKİLDE BURADAN ÇAĞIRIYORUZ
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=mracnar_checkstyle_3 -DskipTests
+        run: >
+          mvn -B -Djacoco.skip=true
+          verify
+          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          -Dsonar.projectKey=mracnar_checkstyle_2
+          -DskipTests
