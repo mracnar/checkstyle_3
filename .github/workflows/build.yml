@@ -46,4 +46,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -e --no-transfer-progress -B -Djacoco.skip=true verify 
           org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
-          -Dsonar.projectKey=mracnar_checkstyle_2 -DskipTests
+          -Dsonar.projectKey=mracnar_checkstyle_3 -DskipTests
